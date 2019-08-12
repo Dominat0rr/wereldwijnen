@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments::head(title='Wereldwijnen')"></head>
+    <body>
+        <nav th:replace="fragments::menu"></nav>
+        <nav th:replace="fragments::submenu"></nav>
+
+        <p>We hebben momenteel <span th:text="${aantalWijnen}"></span> wijnen</p>
+    </body>
+</html>
