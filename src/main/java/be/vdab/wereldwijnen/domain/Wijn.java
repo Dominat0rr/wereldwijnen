@@ -39,7 +39,7 @@ public class Wijn implements Serializable {
     protected Wijn() { }
 
     public Wijn(Soort soort, short jaar, byte beoordeling, BigDecimal prijs/*, long inBestelling*/) {
-        this.soort = soort;
+        setSoort(soort);
         this.jaar = jaar;
         this.beoordeling = beoordeling;
         this.prijs = prijs;
@@ -78,20 +78,23 @@ public class Wijn implements Serializable {
 //        inBestelling += aantal;
 //    }
 
+    public void setSoort(Soort soort) throws NullPointerException {
+        if (!soort.getWijnen().contains(this)) soort.add(this);
+        this.soort = soort;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Wijn)) return false;
         Wijn wijn = (Wijn) o;
-        return id == wijn.id &&
-                jaar == wijn.jaar &&
+        return jaar == wijn.jaar &&
                 beoordeling == wijn.beoordeling &&
-                Objects.equals(soort, wijn.soort) &&
-                Objects.equals(prijs, wijn.prijs);
+                Objects.equals(soort, wijn.soort);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, soort, jaar, beoordeling, prijs);
+        return Objects.hash(soort, jaar, beoordeling);
     }
 }

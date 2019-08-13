@@ -62,9 +62,16 @@ public class Soort implements Serializable {
     }
 
     public void setLand(Land land) throws NullPointerException {
-        //if (campus == null) throw new NullPointerException();
         if (!land.getSoorten().contains(this)) land.add(this);
         this.land = land;
+    }
+
+    public boolean add(Wijn wijn) {
+        boolean toegevoegd = wijnen.add(wijn);
+        Soort oudeSoort = wijn.getSoort();
+        if (oudeSoort != null && oudeSoort != this) oudeSoort.wijnen.remove(wijn);
+        if (this != oudeSoort) wijn.setSoort(this);
+        return toegevoegd;
     }
 
     @Override
