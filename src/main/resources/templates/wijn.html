@@ -30,9 +30,16 @@
                 </tr>
                 <tr>
                     <td>Prijs</td>
-                    <td><b th:text="*{prijs}"/></td>
+                    <td><b th:text="*{ '€ ' + {prijs}}"/></td>
                 </tr>
             </table>
+            <p></p>
+            <form th:object="${bestelForm}"
+                  th:action="@{/wijnen/{id}/bestellen(id=${wijn.id})}" method="post">
+                <label>Aantal flessen<span th:errors="*{aantal}"></span> <input th:field="*{aantal}" type='number' autofocus required min="1">
+                </label> <input type="submit" value="Toevoegen">
+            </form>
+            <script th:src="@{/js/preventDoubleSubmit.js}"></script>
         </div>
     </body>
 </html>

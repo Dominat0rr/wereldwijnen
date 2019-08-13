@@ -35,7 +35,6 @@ public class Wijn implements Serializable {
     private long versie;
     public static final String FIND_ALL = "Wijn.findAll";
     public static final String FIND_BY_SOORT  = "Wijn.findBySoort";
-    //public static final String FIND_BY_MULTIPLE_IDS = "Wijn.findByMultipleIds";
 
     protected Wijn() { }
 
