@@ -27,12 +27,12 @@ public class DefaultWijnService implements WijnService {
 
     @Override
     public List<Wijn> findAll() {
-        return null;
+        return repository.findAll();
     }
 
     @Override
     public Optional<Wijn> findById(long id) {
-        return Optional.empty();
+        return repository.findById(id);
     }
 
     @Override
@@ -41,8 +41,8 @@ public class DefaultWijnService implements WijnService {
     }
 
     @Override
-    public List<Wijn> findAllWijnenBySoortId(long id) {
-        return null;
+    public List<Wijn> findAllBySoortId(long id) {
+        return repository.findAllBySoortId(id);
     }
 
     @Override

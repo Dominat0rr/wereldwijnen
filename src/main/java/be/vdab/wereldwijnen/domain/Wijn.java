@@ -1,5 +1,7 @@
 package be.vdab.wereldwijnen.domain;
 
+import org.springframework.format.annotation.NumberFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,7 +15,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "wijnen")
-@NamedQuery(name = "Wijn.findAantal", query = "select count(*) from Wijn w")
+@NamedQuery(name = "Wijn.findAll", query = "select w from Wijn w order by w.jaar")
+@NamedQuery(name = "Wijn.findBySoort", query =
+        "select w from Wijn w where w.soort.id = :soortid order by w.jaar")
 public class Wijn implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -24,21 +28,23 @@ public class Wijn implements Serializable {
     private Soort soort;
     private short jaar;
     private byte beoordeling;
+    @NumberFormat(pattern = "0.00")
     private BigDecimal prijs;
-    private long inBestelling;
+    //private long inBestelling;
     @Version
     private long versie;
-    public static final String FIND_AANTAL_WIJNEN = "Wijn.findAantal";
+    public static final String FIND_ALL = "Wijn.findAll";
+    public static final String FIND_BY_SOORT  = "Wijn.findBySoort";
     //public static final String FIND_BY_MULTIPLE_IDS = "Wijn.findByMultipleIds";
 
     protected Wijn() { }
 
-    public Wijn(Soort soort, short jaar, byte beoordeling, BigDecimal prijs, long inBestelling) {
+    public Wijn(Soort soort, short jaar, byte beoordeling, BigDecimal prijs/*, long inBestelling*/) {
         this.soort = soort;
         this.jaar = jaar;
         this.beoordeling = beoordeling;
         this.prijs = prijs;
-        this.inBestelling = inBestelling;
+        //this.inBestelling = inBestelling;
     }
 
     public long getId() {
@@ -61,13 +67,17 @@ public class Wijn implements Serializable {
         return prijs;
     }
 
-    public long getInBestelling() {
-        return inBestelling;
-    }
+//    public long getInBestelling() {
+//        return inBestelling;
+//    }
 
     public long getVersie() {
         return versie;
     }
+
+//    public void addBestelling(long aantal){
+//        inBestelling += aantal;
+//    }
 
     @Override
     public boolean equals(Object o) {

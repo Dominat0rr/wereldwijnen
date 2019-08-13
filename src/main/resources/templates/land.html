@@ -7,12 +7,30 @@
         <nav th:replace="fragments::menu"></nav>
         <nav th:replace="fragments::submenu"></nav>
         <h1 th:if="${land} == null">Land niet gevonden: <span th:text="${id}"></span></h1>
-        <h1 th:if="${land} != null" th:text="'Soorten uit ' + ${land.naam}"></h1>
 
-        <ul th:if="${land} != null" class='zebra'>
-            <li th:each="soort:${soorten}" th:object="${soort}"><a
-                    th:href="@{/soorten/{id}(id=*{id})}"
-                    th:text="*{naam}"></a></li>
-        </ul>
+        <div th:if="${land} != null">
+            <h1 th:if="${land} != null" th:text="'Soorten uit ' + ${land.naam}"></h1>
+
+            <ul th:if="${land} != null" class='zebra'>
+                <li th:each="soort:${soorten}" th:object="${soort}"><a
+                        th:href="@{/landen/{landId}/soorten/{soortId}(landId=${land.id},soortId=${soort.id})}"
+                        th:text="*{naam}"></a></li>
+            </ul>
+        </div>
+
+        <div th:if="${soort} != null">
+            <h1 th:if="${soort} != null" th:text="'Wijnen uit ' + ${soort.naam}"></h1>
+
+            <ul th:if="${soort} != null" class='zebra'>
+                <li th:each="wijn:${wijnen}" th:object="${wijn}"><a
+                        th:href="@{/wijnen/{id}(id=*{id})}"
+                        th:text="${wijn.jaar} + ' '">
+                    </a>
+                    <b th:each="i : ${#numbers.sequence(0 , wijn.beoordeling)}"
+                       th:text="'★'">
+                    </b>
+                </li>
+            </ul>
+        </div>
     </body>
 </html>

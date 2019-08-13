@@ -24,7 +24,7 @@ public class JpaWijnRepository implements WijnRepository {
 
     @Override
     public List<Wijn> findAll() {
-        return manager.createQuery("select w from Wijn w order by w.id", Wijn.class).getResultList();
+        return manager.createNamedQuery(Wijn.FIND_ALL, Wijn.class).getResultList();
     }
 
     @Override
@@ -38,8 +38,10 @@ public class JpaWijnRepository implements WijnRepository {
     }
 
     @Override
-    public List<Wijn> findAllWijnenBySoortId(long id) {
-        return null;
+    public List<Wijn> findAllBySoortId(long id) {
+        return manager.createNamedQuery(Wijn.FIND_BY_SOORT, Wijn.class)
+                .setParameter("soortid", id)
+                .getResultList();
     }
 
     @Override
@@ -70,7 +72,8 @@ public class JpaWijnRepository implements WijnRepository {
 
     @Override
     public long findAantalWijnen() {
-        return manager.createNamedQuery(Wijn.FIND_AANTAL_WIJNEN, Wijn.class).getFirstResult();
+        //return manager.createNamedQuery(Wijn.FIND_AANTAL_WIJNEN, Wijn.class).getFirstResult();
+        return 0;
     }
 
     @Override

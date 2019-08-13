@@ -25,7 +25,8 @@ public class JpaSoortRepository implements SoortRepository {
 
     @Override
     public Optional<Soort> findById(long id) {
-        return Optional.ofNullable(manager.find(Soort.class, id, LockModeType.PESSIMISTIC_WRITE));
+        //return Optional.ofNullable(manager.find(Soort.class, id, LockModeType.PESSIMISTIC_WRITE));
+        return Optional.ofNullable(manager.find(Soort.class, id));
     }
 
     @Override

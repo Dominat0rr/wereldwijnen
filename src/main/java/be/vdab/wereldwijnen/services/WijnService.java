@@ -16,7 +16,7 @@ public interface WijnService {
     List<Wijn> findAll();
     Optional<Wijn> findById(long id);
     List<Wijn> findByIds(Set<Long> ids);
-    List<Wijn> findAllWijnenBySoortId(long id);
+    List<Wijn> findAllBySoortId(long id);
     List<Wijn> findAllWijnenByLandId(long id);
     long create(Wijn wijn);
     void update(Wijn wijn);

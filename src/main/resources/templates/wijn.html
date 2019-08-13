@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments::head(title =${wijn} == null ? 'Wijn niet gevonden' : 'Wereldwijn | ' + ${wijn.id})">
+    </head>
+
+    <body>
+    <nav th:replace="fragments::menu"></nav>
+    <nav th:replace="fragments::submenu"></nav>
+    <h1>Wijn toevoegen aan mandje</h1>
+        <h1 th:if="${wijn} == null">Wijn niet gevonden: <span th:text="${id}"></span></h1>
+        <div th:if="${wijn} != null" th:object="${wijn}">
+            <h2>Terug naar overzicht</h2>
+            <table>
+                <tr>
+                    <td>Land</td>
+                    <td><b th:text="*{soort.land.naam}"/></td>
+                </tr>
+                <tr>
+                    <td>Soort</td>
+                    <td><b th:text="*{soort.naam}"/></td>
+                </tr>
+                <tr>
+                    <td>Jaar</td>
+                    <td><b th:text="*{jaar}"/></td>
+                </tr>
+                <tr>
+                    <td>Beoordeling</td>
+                    <td><b th:each="i : ${#numbers.sequence(0 , wijn.beoordeling)}"
+                           th:text="'★'"/></td>
+                </tr>
+                <tr>
+                    <td>Prijs</td>
+                    <td><b th:text="*{prijs}"/></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

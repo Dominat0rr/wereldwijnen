@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments::head(title='Wereldwijn | Wijnen')"></head>
+
+    <body>
+        <nav th:replace="fragments::menu"></nav>
+        <nav th:replace="fragments::submenu"></nav>
+        <h1>Wijnen</h1>
+        <ul class="zebra">
+            <li th:each="wijn:${wijnen}" th:object="${wijn}">
+                <a th:href="@{/wijnen/{id}(id=*{id})}" th:text="${wijn.jaar} + ' '"></a>
+                <b th:each="i : ${#numbers.sequence(0 , wijn.beoordeling)}" th:text="'★'"></b>
+            </li>
+        </ul>
+    </body>
+</html>
