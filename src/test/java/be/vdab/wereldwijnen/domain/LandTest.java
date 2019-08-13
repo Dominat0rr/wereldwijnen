@@ -6,14 +6,22 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+/**
+ * @version 1.0
+ * @author Dominik Claerman
+ *
+ */
+
 public class LandTest {
     private Soort soort;
     private Land land1;
+    private Land land1Dubbel;
     private Land land2;
 
     @Before
     public void before() {
         land1 = new Land("test1");
+        land1Dubbel = new Land("test1");
         land2 = new Land("test2");
         soort = new Soort("testSoort", land1);
     }
@@ -34,5 +42,30 @@ public class LandTest {
     @Test
     public void eenNullSoortToevoegenMislukt() {
         assertThatNullPointerException().isThrownBy(() -> land1.add(null));
+    }
+
+    @Test
+    public void landenZijnGelijkAlsHunNaamGelijkZijn() {
+        assertThat(land1).isEqualTo(land1Dubbel);
+    }
+
+    @Test
+    public void landenZijnVerschillendAlsHunNaamVerschillendZijn() {
+        assertThat(land1).isNotEqualTo(land2);
+    }
+
+    @Test
+    public void eenLandVerschiltVanNull() {
+        assertThat(land1).isNotEqualTo(null);
+    }
+
+    @Test
+    public void eenLandVerschiltVanEenAnderTypeObject() {
+        assertThat(land1).isNotEqualTo("");
+    }
+
+    @Test
+    public void gelijkeLandenGevenDezelfdeHashCode() {
+        assertThat(land1).hasSameHashCodeAs(land1Dubbel);
     }
 }

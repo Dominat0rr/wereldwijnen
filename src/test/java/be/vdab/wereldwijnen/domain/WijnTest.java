@@ -8,6 +8,12 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+/**
+ * @version 1.0
+ * @author Dominik Claerman
+ *
+ */
+
 public class WijnTest {
     private Wijn wijn1;
     private Wijn wijn1Dubbel;

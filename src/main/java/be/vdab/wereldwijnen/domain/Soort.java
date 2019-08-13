@@ -79,13 +79,12 @@ public class Soort implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Soort)) return false;
         Soort soort = (Soort) o;
-        return id == soort.id &&
-                Objects.equals(naam.toLowerCase(), soort.naam.toLowerCase()) &&
+        return Objects.equals(naam.toLowerCase(), soort.naam.toLowerCase()) &&
                 Objects.equals(land, soort.land);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, naam.toLowerCase(), land);
+        return Objects.hash(naam.toLowerCase(), land);
     }
 }
