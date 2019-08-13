@@ -4,11 +4,14 @@ import be.vdab.wereldwijnen.forms.BestelForm;
 import be.vdab.wereldwijnen.services.WijnService;
 import be.vdab.wereldwijnen.sessions.Mandje;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 /**
@@ -43,5 +46,16 @@ public class WijnController {
             modelAndView.addObject(form);
         });
         return modelAndView;
+    }
+
+    @PostMapping("{id}/bestellen")
+    ModelAndView bestellen(@PathVariable long id, @Valid BestelForm form, Errors errors) {
+        if (errors.hasErrors()) {
+            ModelAndView modelAndView = new ModelAndView("wijn");
+            wijnService.findById(id).ifPresent(bier -> modelAndView.addObject(bier));
+            return modelAndView;
+        }
+        mandje.voegToe(id, form.getAantal());
+        return new ModelAndView("redirect:/mandje");
     }
 }
