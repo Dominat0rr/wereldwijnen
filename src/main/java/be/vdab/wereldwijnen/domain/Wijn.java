@@ -83,13 +83,15 @@ public class Wijn implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Wijn)) return false;
         Wijn wijn = (Wijn) o;
-        return jaar == wijn.jaar &&
+        return id == wijn.id &&
+                jaar == wijn.jaar &&
+                beoordeling == wijn.beoordeling &&
                 Objects.equals(soort, wijn.soort) &&
                 Objects.equals(prijs, wijn.prijs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(soort, jaar, prijs);
+        return Objects.hash(id, soort, jaar, beoordeling, prijs);
     }
 }

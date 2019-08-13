@@ -50,16 +50,27 @@ public class Land implements Serializable {
         return Collections.unmodifiableSet(soorten);
     }
 
+    public boolean add(Soort soort) {
+        boolean toegevoegd = soorten.add(soort);
+        Land oudLand = soort.getLand();
+
+        if (oudLand != null && oudLand != this) oudLand.soorten.remove(soort);
+        if (this != oudLand) soort.setLand(this);
+
+        return toegevoegd;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Land)) return false;
         Land land = (Land) o;
-        return Objects.equals(naam.toLowerCase(), land.naam.toLowerCase());
+        return id == land.id &&
+                Objects.equals(naam, land.naam);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(naam.toLowerCase());
+        return Objects.hash(id, naam);
     }
 }

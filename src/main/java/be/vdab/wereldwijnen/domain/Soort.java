@@ -41,8 +41,8 @@ public class Soort implements Serializable {
 
     public Soort(@NotBlank String naam, Land land) {
         this.naam = naam;
-        this.land = land;
         this.wijnen = new LinkedHashSet<>();
+        setLand(land);
     }
 
     public long getId() {
@@ -61,17 +61,24 @@ public class Soort implements Serializable {
         return Collections.unmodifiableSet(wijnen);
     }
 
+    public void setLand(Land land) throws NullPointerException {
+        //if (campus == null) throw new NullPointerException();
+        if (!land.getSoorten().contains(this)) land.add(this);
+        this.land = land;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Soort)) return false;
         Soort soort = (Soort) o;
-        return Objects.equals(naam.toLowerCase(), soort.naam.toLowerCase()) &&
+        return id == soort.id &&
+                Objects.equals(naam.toLowerCase(), soort.naam.toLowerCase()) &&
                 Objects.equals(land, soort.land);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(naam.toLowerCase(), land);
+        return Objects.hash(id, naam.toLowerCase(), land);
     }
 }
