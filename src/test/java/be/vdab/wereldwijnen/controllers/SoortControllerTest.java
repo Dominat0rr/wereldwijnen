@@ -3,7 +3,6 @@ package be.vdab.wereldwijnen.controllers;
 import be.vdab.wereldwijnen.domain.Land;
 import be.vdab.wereldwijnen.domain.Soort;
 import be.vdab.wereldwijnen.services.SoortService;
-import be.vdab.wereldwijnen.services.WijnService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

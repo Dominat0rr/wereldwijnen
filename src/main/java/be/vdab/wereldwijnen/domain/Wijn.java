@@ -46,6 +46,15 @@ public class Wijn implements Serializable {
         //this.inBestelling = inBestelling;
     }
 
+    public Wijn(long id, Soort soort, short jaar, byte beoordeling, BigDecimal prijs/*, long inBestelling*/) {
+        this.id = id;
+        setSoort(soort);
+        this.jaar = jaar;
+        this.beoordeling = beoordeling;
+        this.prijs = prijs;
+        //this.inBestelling = inBestelling;
+    }
+
     public long getId() {
         return id;
     }
