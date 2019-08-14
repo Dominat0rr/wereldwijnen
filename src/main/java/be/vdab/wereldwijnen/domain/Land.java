@@ -15,12 +15,13 @@ import java.util.Set;
  */
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "landen")
 @NamedQuery(name = "Land.findAll", query = "select l from Land l order by l.naam")
 public class Land implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotBlank
     private String naam;

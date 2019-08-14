@@ -30,7 +30,16 @@ public class JpaLandRepository implements LandRepository {
 
     @Override
     public List<Land> findAll() {
-        //return manager.createQuery("select l from Land l order by l.naam", Land.class).getResultList();
         return manager.createNamedQuery(Land.FIND_ALL, Land.class).getResultList();
+    }
+
+    @Override
+    public void create(Land land) {
+        manager.persist(land);
+    }
+
+    @Override
+    public void delete(long id) {
+        findById(id).ifPresent(land -> manager.remove(land));
     }
 }

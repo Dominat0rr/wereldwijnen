@@ -14,4 +14,6 @@ import java.util.Optional;
 public interface LandService {
     Optional<Land> findById(long id);
     List<Land> findAll();
+    void create(Land land);
+    void delete(long id);
 }
