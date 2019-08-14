@@ -36,47 +36,30 @@ public class DefaultWijnService implements WijnService {
     }
 
     @Override
-    public List<Wijn> findByIds(Set<Long> ids) {
-        return null;
-    }
-
-    @Override
     public List<Wijn> findAllBySoortId(long id) {
         return repository.findAllBySoortId(id);
     }
 
     @Override
-    public List<Wijn> findAllWijnenByLandId(long id) {
-        return null;
+    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
+    public void create(Wijn wijn) {
+        repository.create(wijn);
     }
 
     @Override
-    public long create(Wijn wijn) {
-        return 0;
-    }
-
-    @Override
-    public void update(Wijn wijn) {
-
-    }
-
-    @Override
+    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
     public void updateBesteldAantal(long id, int aantal) {
-
+        repository.updateBesteldAantal(id, aantal);
     }
 
     @Override
+    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
     public void delete(long id) {
-
+        repository.delete(id);
     }
 
     @Override
     public long findAantalWijnen() {
-        return 0;
-    }
-
-    @Override
-    public void bestelBier(long id, int aantal) {
-
+        return repository.findAantalWijnen();
     }
 }

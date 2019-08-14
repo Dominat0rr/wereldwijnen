@@ -2,6 +2,8 @@ package be.vdab.wereldwijnen.repositories;
 
 import be.vdab.wereldwijnen.domain.Wijn;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -33,11 +35,6 @@ public class JpaWijnRepository implements WijnRepository {
     }
 
     @Override
-    public List<Wijn> findByIds(Set<Long> ids) {
-        return null;
-    }
-
-    @Override
     public List<Wijn> findAllBySoortId(long id) {
         return manager.createNamedQuery(Wijn.FIND_BY_SOORT, Wijn.class)
                 .setParameter("soortid", id)
@@ -45,39 +42,22 @@ public class JpaWijnRepository implements WijnRepository {
     }
 
     @Override
-    public List<Wijn> findAllWijnenByLandId(long id) {
-        //return manager.createQuery("select count(*) from Wijn w", Wijn.class);
-        return null;
-    }
-
-    @Override
-    public long create(Wijn wijn) {
-        return 0;
-    }
-
-    @Override
-    public void update(Wijn wijn) {
-
+    public void create(Wijn wijn) {
+        manager.persist(wijn);
     }
 
     @Override
     public void updateBesteldAantal(long id, int aantal) {
-
+        // TODO:
     }
 
     @Override
     public void delete(long id) {
-
+        findById(id).ifPresent(wijn -> manager.remove(wijn));
     }
 
     @Override
     public long findAantalWijnen() {
-        //return manager.createNamedQuery(Wijn.FIND_AANTAL_WIJNEN, Wijn.class).getFirstResult();
         return 0;
-    }
-
-    @Override
-    public void bestelBier(long id, int aantal) {
-
     }
 }

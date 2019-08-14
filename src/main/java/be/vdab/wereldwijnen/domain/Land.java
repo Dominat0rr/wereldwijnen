@@ -71,11 +71,11 @@ public class Land implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Land)) return false;
         Land land = (Land) o;
-        return Objects.equals(naam.toLowerCase(), land.naam.toLowerCase());
+        return Objects.equals(naam, land.naam);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(naam.toLowerCase());
+        return Objects.hash(naam);
     }
 }

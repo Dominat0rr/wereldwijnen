@@ -15,13 +15,9 @@ import java.util.Set;
 public interface WijnRepository {
     List<Wijn> findAll();
     Optional<Wijn> findById(long id);
-    List<Wijn> findByIds(Set<Long> ids);
     List<Wijn> findAllBySoortId(long id);
-    List<Wijn> findAllWijnenByLandId(long id);
-    long create(Wijn wijn);
-    void update(Wijn wijn);
+    void create(Wijn wijn);
     void updateBesteldAantal(long id, int aantal);
     void delete(long id);
     long findAantalWijnen();
-    void bestelBier(long id, int aantal);
 }

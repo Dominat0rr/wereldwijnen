@@ -1,5 +1,6 @@
 package be.vdab.wereldwijnen.sessions;
 
+import be.vdab.wereldwijnen.domain.Wijn;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -22,7 +23,7 @@ public class Mandje implements Serializable {
         if (this.bevat(id)) {
             wijnen.put(id, wijnen.get(id) + aantal);
         }
-        wijnen.put(id, aantal);
+        else wijnen.put(id, aantal);
     }
 
     public boolean bevat(long id) {

@@ -52,7 +52,7 @@ public class WijnController {
     ModelAndView bestellen(@PathVariable long id, @Valid BestelForm form, Errors errors) {
         if (errors.hasErrors()) {
             ModelAndView modelAndView = new ModelAndView("wijn");
-            wijnService.findById(id).ifPresent(bier -> modelAndView.addObject(bier));
+            wijnService.findById(id).ifPresent(wijn -> modelAndView.addObject(wijn));
             return modelAndView;
         }
         mandje.voegToe(id, form.getAantal());
