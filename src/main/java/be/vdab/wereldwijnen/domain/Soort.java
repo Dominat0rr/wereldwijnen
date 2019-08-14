@@ -45,6 +45,13 @@ public class Soort implements Serializable {
         setLand(land);
     }
 
+    public Soort(long id, @NotBlank String naam, Land land) {
+        this.id = id;
+        this.naam = naam;
+        this.wijnen = new LinkedHashSet<>();
+        setLand(land);
+    }
+
     public long getId() {
         return id;
     }

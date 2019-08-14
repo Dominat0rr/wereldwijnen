@@ -1,6 +1,7 @@
 package be.vdab.wereldwijnen.controllers;
 
 import be.vdab.wereldwijnen.domain.Land;
+import be.vdab.wereldwijnen.domain.Soort;
 import be.vdab.wereldwijnen.services.LandService;
 import be.vdab.wereldwijnen.services.SoortService;
 import be.vdab.wereldwijnen.services.WijnService;
@@ -10,8 +11,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -36,6 +39,8 @@ public class LandControllerTest {
     public void before() {
         when(landService.findById(1))
                 .thenReturn(Optional.of(new Land(1,"test")));
+        when(soortService.findById(1))
+                .thenReturn(Optional.of(new Soort(1,"test", new Land(1, "test"))));
         landController = new LandController(landService, soortService, wijnService);
     }
 
@@ -65,5 +70,16 @@ public class LandControllerTest {
     @Test
     public void landGeeftOnbestaandLandNietDoorAanDeThymeleafPagina() {
         assertThat(landController.land(-1).getModel()).doesNotContainKeys("land");
+    }
+
+    // soorten en wijnen van een land
+    @Test
+    public void soortGebruiktDeThymeleafPaginaland() {
+        assertThat(landController.soort(1, 1).getViewName()).isEqualTo("land");
+    }
+
+    @Test
+    public void soortGeeftWijnenDoorAanDeThymeleafPagina() {
+        assertThat(landController.soort(1, 1).getModel().get("wijnen")).isInstanceOf(Set.class);
     }
 }
