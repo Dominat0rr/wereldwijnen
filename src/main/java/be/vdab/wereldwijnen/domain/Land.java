@@ -38,6 +38,12 @@ public class Land implements Serializable {
         this.soorten = new LinkedHashSet<>();
     }
 
+    public Land(long id, @NotBlank String naam) {
+        this.id = id;
+        this.naam = naam;
+        this.soorten = new LinkedHashSet<>();
+    }
+
     public long getId() {
         return id;
     }
