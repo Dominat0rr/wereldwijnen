@@ -48,13 +48,13 @@ public class JpaBestelbonRepository implements BestelbonRepository {
         return bestelbonId;
     }
 
-    private void createBestelbonLijn(long bestelbonId, long bierId, int aantal, BigDecimal prijs) {
+    private void createBestelbonLijn(long bestelbonId, long wijnId, int aantal, BigDecimal prijs) {
         Map<String, Object> kolomWaarden = new HashMap<>();
         kolomWaarden.put("bestelbonid", bestelbonId);
-        kolomWaarden.put("bierid", bierId);
+        kolomWaarden.put("wijnid", wijnId);
         kolomWaarden.put("aantal", aantal);
         kolomWaarden.put("prijs", prijs);
         //insertBestelbonLijn.execute(kolomWaarden);
-        wijnService.updateBesteldAantal(bierId, aantal);
+        wijnService.updateBesteldAantal(wijnId, aantal);
     }
 }
