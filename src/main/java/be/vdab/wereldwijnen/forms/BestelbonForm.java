@@ -22,8 +22,8 @@ public class BestelbonForm {
     @Min(1000)
     @Max(9999)
     private int postcode;
-    private boolean afhalen;
-    private boolean opsturen;
+    //private boolean afhalen;
+    //private boolean opsturen;
 
     public BestelbonForm(String naam, String straat, String huisnummer, String gemeente, int postcode) {
         this.naam = naam;

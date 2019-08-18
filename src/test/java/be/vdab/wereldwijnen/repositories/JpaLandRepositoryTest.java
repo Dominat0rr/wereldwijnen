@@ -12,8 +12,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.EntityManager;
-
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;

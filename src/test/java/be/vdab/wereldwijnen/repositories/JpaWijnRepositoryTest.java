@@ -31,10 +31,10 @@ import static org.junit.Assert.assertFalse;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Import(JpaWijnRepository.class)
 @Sql("/insertLand.sql")
 @Sql("/insertSoort.sql")
 @Sql("/insertWijn.sql")
-@Import(JpaWijnRepository.class)
 public class JpaWijnRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
     private static final String WIJNEN = "wijnen";
     private Land land;

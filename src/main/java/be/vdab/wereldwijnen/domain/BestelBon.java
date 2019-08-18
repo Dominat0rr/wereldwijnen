@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -27,7 +28,7 @@ public class BestelBon implements Serializable {
     private String naam;
     @Embedded
     private Adres adres;
-    @NotBlank
+    //@NotNull
     private BestelWijze bestelwijze;
     @ElementCollection
     @CollectionTable(name = "bestelbonlijnen", joinColumns = @JoinColumn(name = "bonid") )
@@ -37,5 +38,30 @@ public class BestelBon implements Serializable {
 
     protected BestelBon() { }
 
+    public BestelBon(LocalDateTime datum, String naam, Adres adres, BestelWijze bestelwijze) {
+        this.datum = datum;
+        this.naam = naam;
+        this.adres = adres;
+        this.bestelwijze = bestelwijze;
+    }
 
+    public long getId() {
+        return id;
+    }
+
+    public LocalDateTime getDatum() {
+        return datum;
+    }
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public Adres getAdres() {
+        return adres;
+    }
+
+    public BestelWijze getBestelwijze() {
+        return bestelwijze;
+    }
 }

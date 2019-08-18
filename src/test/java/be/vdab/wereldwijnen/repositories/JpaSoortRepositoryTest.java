@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import(JpaLandRepository.class)
+@Import(JpaSoortRepository.class)
 @Sql("/insertLand.sql")
 @Sql("/insertSoort.sql")
 public class JpaSoortRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
