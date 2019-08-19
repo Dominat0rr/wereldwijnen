@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -77,8 +78,8 @@ public class MandjeController {
     }
 
     @PostMapping("bestellen")
-    public ModelAndView toevoegen(@Valid BestelbonForm form, Errors errors, RedirectAttributes redirect) {
-        if (mandje.isLeeg()) return new ModelAndView("redirect:/mandje");
+    public ModelAndView toevoegen(HttpServletRequest request, @Valid BestelbonForm form, Errors errors, RedirectAttributes redirect) {
+        if (mandje.isLeeg()) return new ModelAndView("redirect:/");
         if(errors.hasErrors()) return new ModelAndView("mandje", "mandje", mandje);
         BestelBon bestelBon = new BestelBon(LocalDateTime.now(), form.getNaam(),
                 new Adres(form.getStraat(), form.getHuisnummer(), String.valueOf(form.getPostcode()), form.getGemeente()),
@@ -91,6 +92,7 @@ public class MandjeController {
         });
         long id = bestelbonService.create(bestelBon);
         wijnen.clear();
+        request.getSession().invalidate();
         redirect.addAttribute("id", id);
         return new ModelAndView("redirect:/mandje/besteld/{id}");
     }

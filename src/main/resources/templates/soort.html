@@ -6,6 +6,8 @@
     <body>
         <nav th:replace="fragments::menu"></nav>
         <nav th:replace="fragments::submenu"></nav>
+
+        <h1 th:if="${soort} == null">Soort niet gevonden: <span th:text="${id}"></span></h1>
         <div th:if="${soort} != null">
             <h1 th:if="${soort} != null" th:text="'Wijnen uit ' + ${soort.naam}"></h1>
 

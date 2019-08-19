@@ -57,7 +57,7 @@ public class BestelbonForm {
 
     public BestelWijze getBestelwijze() {
         //return bestelwijze;
-        if (bestelwijze == 0) return BestelWijze.AFHALEN;
-        else return BestelWijze.OPSTUREN;
+        if (bestelwijze == 1) return BestelWijze.OPSTUREN;
+        return BestelWijze.OPSTUREN;
     }
 }
