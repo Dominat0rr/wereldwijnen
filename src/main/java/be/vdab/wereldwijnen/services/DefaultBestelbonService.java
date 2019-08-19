@@ -29,4 +29,3 @@ public class DefaultBestelbonService implements BestelbonService {
         return repository.create(bestelBon);
     }
 }
-

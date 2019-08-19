@@ -30,7 +30,7 @@ public class Wijn implements Serializable {
     private byte beoordeling;
     @NumberFormat(pattern = "0.00")
     private BigDecimal prijs;
-    //private long inBestelling;
+    private long inBestelling;
     @Version
     private long versie;
     public static final String FIND_ALL = "Wijn.findAll";
@@ -38,21 +38,21 @@ public class Wijn implements Serializable {
 
     protected Wijn() { }
 
-    public Wijn(Soort soort, short jaar, byte beoordeling, BigDecimal prijs/*, long inBestelling*/) {
+    public Wijn(Soort soort, short jaar, byte beoordeling, BigDecimal prijs, long inBestelling) {
         setSoort(soort);
         this.jaar = jaar;
         this.beoordeling = beoordeling;
         this.prijs = prijs;
-        //this.inBestelling = inBestelling;
+        this.inBestelling = inBestelling;
     }
 
-    public Wijn(long id, Soort soort, short jaar, byte beoordeling, BigDecimal prijs/*, long inBestelling*/) {
+    public Wijn(long id, Soort soort, short jaar, byte beoordeling, BigDecimal prijs, long inBestelling) {
         this.id = id;
         setSoort(soort);
         this.jaar = jaar;
         this.beoordeling = beoordeling;
         this.prijs = prijs;
-        //this.inBestelling = inBestelling;
+        this.inBestelling = inBestelling;
     }
 
     public long getId() {
@@ -75,17 +75,17 @@ public class Wijn implements Serializable {
         return prijs;
     }
 
-//    public long getInBestelling() {
-//        return inBestelling;
-//    }
+    public long getInBestelling() {
+        return inBestelling;
+    }
 
     public long getVersie() {
         return versie;
     }
 
-//    public void addBestelling(long aantal){
-//        inBestelling += aantal;
-//    }
+    public void addBestelling(long aantal){
+        inBestelling += aantal;
+    }
 
     public void setSoort(Soort soort) throws NullPointerException {
         if (!soort.getWijnen().contains(this)) soort.add(this);

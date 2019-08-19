@@ -45,8 +45,8 @@
             <label>Huisnummer<span th:errors="*{huisnummer}"></span><input th:field="*{huisnummer}" required></label>
             <label>Postcode<span th:errors="*{postcode}"></span><input th:field="*{postcode}" type="number" required min="1000" max="9999"></label>
             <label>Gemeente<span th:errors="*{gemeente}"></span><input th:field="*{gemeente}" required></label>
-            <input class="leveringstype" type="radio" name="leveringtype" value="afhalen" checked> Afhalen<br>
-            <input class="leveringstype" type="radio" name="leveringtype" value="opsturen"> Opsturen<br>
+            <input class="leveringstype" type="radio" th:field="*{bestelwijze}" th:value="0" checked="checked"> Afhalen<br>
+            <input class="leveringstype" type="radio" th:field="*{bestelwijze}" th:value="1"> Opsturen<br>
             <input type="submit" value="Als bestelbon bevestigen"> <input type="hidden" name="id" value="0">
         </form>
         <script th:src="@{/js/preventDoubleSubmit.js}"></script>

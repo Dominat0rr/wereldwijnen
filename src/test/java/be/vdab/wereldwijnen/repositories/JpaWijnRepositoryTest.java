@@ -42,8 +42,6 @@ public class JpaWijnRepositoryTest extends AbstractTransactionalJUnit4SpringCont
     private Wijn wijn;
     @Autowired
     private JpaWijnRepository wijnRepository;
-    @Autowired
-    private EntityManager manager;
 
     private long idVanTestWijn() {
         return super.jdbcTemplate.queryForObject("select id from wijnen where jaar = 1985", Long.class);
@@ -53,30 +51,17 @@ public class JpaWijnRepositoryTest extends AbstractTransactionalJUnit4SpringCont
     public void before() {
         land = new Land("test");
         soort = new Soort("test", land);
-        wijn = new Wijn(soort, (short) 1985, (byte) 3, BigDecimal.TEN);
+        wijn = new Wijn(soort, (short) 1985, (byte) 3, BigDecimal.TEN, 10);
     }
 
     @Test
     public void findById() {
         Optional<Wijn> optionalWijn = wijnRepository.findById(idVanTestWijn());
-        assertThat(((Wijn) optionalWijn.get()).getJaar()).isEqualTo(1985);
+        assertThat(((Wijn) optionalWijn.get()).getJaar()).isEqualTo((short) 1985);
     }
 
     @Test
     public void findByOnbestaandId() {
         assertFalse(wijnRepository.findById(-1).isPresent());
-    }
-
-    @Test
-    public void create() {
-        wijnRepository.create(wijn);
-        assertThat(super.countRowsInTableWhere(WIJNEN, "id = " + wijn.getId())).isOne();
-    }
-
-    @Test
-    public void delete() {
-        long id = idVanTestWijn();
-        wijnRepository.delete(id);
-        assertThat(super.countRowsInTableWhere(WIJNEN, "id=" + id)).isZero();
     }
 }

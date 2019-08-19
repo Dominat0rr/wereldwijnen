@@ -42,21 +42,6 @@ public class JpaWijnRepository implements WijnRepository {
     }
 
     @Override
-    public void create(Wijn wijn) {
-        manager.persist(wijn);
-    }
-
-    @Override
-    public void updateBesteldAantal(long id, int aantal) {
-        // TODO:
-    }
-
-    @Override
-    public void delete(long id) {
-        findById(id).ifPresent(wijn -> manager.remove(wijn));
-    }
-
-    @Override
     public long findAantalWijnen() {
         return 0;
     }

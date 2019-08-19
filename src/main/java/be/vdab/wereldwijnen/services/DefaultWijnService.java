@@ -41,24 +41,6 @@ public class DefaultWijnService implements WijnService {
     }
 
     @Override
-    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
-    public void create(Wijn wijn) {
-        repository.create(wijn);
-    }
-
-    @Override
-    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
-    public void updateBesteldAantal(long id, int aantal) {
-        repository.updateBesteldAantal(id, aantal);
-    }
-
-    @Override
-    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
-    public void delete(long id) {
-        repository.delete(id);
-    }
-
-    @Override
     public long findAantalWijnen() {
         return repository.findAantalWijnen();
     }

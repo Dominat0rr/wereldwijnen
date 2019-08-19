@@ -36,11 +36,4 @@ public class JpaBestelbonRepository implements BestelbonRepository {
         long bestelbonId = bestelBon.getId();
         return bestelbonId;
     }
-
-//    private void createBestelbonLijn(Wijn wijn, int aantal, BigDecimal prijs) {
-//        BestelbonLijn bestelbonLijn = new BestelbonLijn(wijn, aantal, prijs);
-//        manager.persist(bestelbonLijn);
-//        manager.flush();
-//        wijnService.updateBesteldAantal(wijn.getId(), aantal);
-//    }
 }

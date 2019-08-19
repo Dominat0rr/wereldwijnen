@@ -36,7 +36,7 @@ public class WijnControllerTest {
     public void before() {
         when(wijnService.findById(1))
                 .thenReturn(Optional.of(new Wijn(1, new Soort(1, "test", new Land(1, "test")),
-                        (short) 1986, (byte) 3, BigDecimal.TEN)));
+                        (short) 1986, (byte) 3, BigDecimal.TEN, 10)));
         wijnController = new WijnController(wijnService, mandje);
     }
 

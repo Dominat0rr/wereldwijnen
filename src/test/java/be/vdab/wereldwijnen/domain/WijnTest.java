@@ -29,14 +29,14 @@ public class WijnTest {
         land2 = new Land("TestL2");
         soort1 = new Soort("testS1", land1);
         soort2 = new Soort("testS2", land2);
-        wijn1 = new Wijn(soort1, (short)1995, (byte)3, BigDecimal.TEN);
-        wijn1Dubbel = new Wijn(soort1, (short)1995, (byte)3, BigDecimal.TEN);
-        wijn2 = new Wijn(soort1, (short)1985, (byte)5, BigDecimal.TEN);
+        wijn1 = new Wijn(soort1, (short)1995, (byte)3, BigDecimal.TEN, 10);
+        wijn1Dubbel = new Wijn(soort1, (short)1995, (byte)3, BigDecimal.TEN, 10);
+        wijn2 = new Wijn(soort1, (short)1985, (byte)5, BigDecimal.TEN, 10);
     }
 
     @Test
     public void eenNullSoortInDeConstructorMislukt() {
-        assertThatNullPointerException().isThrownBy(()-> new Wijn(null, (short)1985, (byte)5, BigDecimal.TEN));
+        assertThatNullPointerException().isThrownBy(()-> new Wijn(null, (short)1985, (byte)5, BigDecimal.TEN, 10));
     }
 
     @Test

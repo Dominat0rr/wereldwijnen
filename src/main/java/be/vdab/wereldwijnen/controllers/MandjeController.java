@@ -56,7 +56,7 @@ public class MandjeController {
     @GetMapping
     public ModelAndView mandje() {
         ModelAndView modelAndView = new ModelAndView("mandje");
-        BestelbonForm bestelbonform = new BestelbonForm(null, null, null, null, 0);
+        BestelbonForm bestelbonform = new BestelbonForm(null, null, null, null, 0, (byte) 0);
         modelAndView.addObject("bestelbonform", bestelbonform);
 
         if (mandje.isLeeg()) return modelAndView;
@@ -78,11 +78,11 @@ public class MandjeController {
 
     @PostMapping("bestellen")
     public ModelAndView toevoegen(@Valid BestelbonForm form, Errors errors, RedirectAttributes redirect) {
-        if (mandje.isLeeg()) return new ModelAndView("redirect:/");
+        if (mandje.isLeeg()) return new ModelAndView("redirect:/mandje");
         if(errors.hasErrors()) return new ModelAndView("mandje", "mandje", mandje);
         BestelBon bestelBon = new BestelBon(LocalDateTime.now(), form.getNaam(),
                 new Adres(form.getStraat(), form.getHuisnummer(), String.valueOf(form.getPostcode()), form.getGemeente()),
-                BestelWijze.AFHALEN);
+                form.getBestelwijze());
         wijnen.forEach((wijn, aantal) -> {
             BestelbonLijn bestelbonLijn = new BestelbonLijn(wijn, aantal, wijn.getPrijs());
             System.out.println("Bestelbonlijn: " + bestelbonLijn + " wijnId: " + bestelbonLijn.getWijn().getId());
@@ -93,7 +93,6 @@ public class MandjeController {
         wijnen.clear();
         redirect.addAttribute("id", id);
         return new ModelAndView("redirect:/mandje/besteld/{id}");
-        //return new ModelAndView("redirect:/mandje");
     }
 
     @GetMapping("besteld/{id}")
