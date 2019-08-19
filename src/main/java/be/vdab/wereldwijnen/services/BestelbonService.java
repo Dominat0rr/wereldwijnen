@@ -1,5 +1,6 @@
 package be.vdab.wereldwijnen.services;
 
+import be.vdab.wereldwijnen.domain.BestelBon;
 import be.vdab.wereldwijnen.forms.BestelbonForm;
 import be.vdab.wereldwijnen.sessions.Mandje;
 
@@ -10,5 +11,5 @@ import be.vdab.wereldwijnen.sessions.Mandje;
  */
 
 public interface BestelbonService {
-    long create(BestelbonForm bestelbonForm, Mandje mandje);
+    long create(BestelBon bestelBon);
 }

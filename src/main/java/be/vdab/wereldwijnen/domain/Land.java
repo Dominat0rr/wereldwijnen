@@ -21,7 +21,7 @@ import java.util.Set;
 public class Land implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotBlank
     private String naam;
@@ -34,12 +34,12 @@ public class Land implements Serializable {
 
     protected Land() { }
 
-    public Land(@NotBlank String naam) {
+    public Land(String naam) {
         this.naam = naam;
         this.soorten = new LinkedHashSet<>();
     }
 
-    public Land(long id, @NotBlank String naam) {
+    public Land(long id, String naam) {
         this.id = id;
         this.naam = naam;
         this.soorten = new LinkedHashSet<>();

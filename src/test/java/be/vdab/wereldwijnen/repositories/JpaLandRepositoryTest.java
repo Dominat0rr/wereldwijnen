@@ -48,22 +48,8 @@ public class JpaLandRepositoryTest extends AbstractTransactionalJUnit4SpringCont
         assertThat(land.getNaam()).isEqualTo("test");
     }
 
-
     @Test
     public void findByOnbestaandeId() {
         assertThat(landRepository.findById(-1)).isNotPresent();
-    }
-
-    @Test
-    public void create() {
-        landRepository.create(land);
-        assertThat(super.countRowsInTableWhere(LANDEN, "id = " + land.getId())).isOne();
-    }
-
-    @Test
-    public void delete() {
-        long id = idVanTestLand();
-        landRepository.delete(id);
-        assertThat(super.countRowsInTableWhere(LANDEN, "id=" + id)).isZero();
     }
 }

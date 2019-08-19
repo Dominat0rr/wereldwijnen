@@ -40,14 +40,4 @@ public class JpaSoortRepository implements SoortRepository {
                 .setParameter("landid", id)
                 .getResultList();
     }
-
-    @Override
-    public void create(Soort soort) {
-        manager.persist(soort);
-    }
-
-    @Override
-    public void delete(long id) {
-        findById(id).ifPresent(soort -> manager.remove(soort));
-    }
 }

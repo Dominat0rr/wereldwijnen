@@ -1,2 +1,1 @@
-insert into landen(naam) values ('test');
-insert into landen(naam) values ('test2');
+insert into landen(id, naam) values (100, 'test');

@@ -1,5 +1,6 @@
 package be.vdab.wereldwijnen.services;
 
+import be.vdab.wereldwijnen.domain.BestelBon;
 import be.vdab.wereldwijnen.forms.BestelbonForm;
 import be.vdab.wereldwijnen.repositories.BestelbonRepository;
 import be.vdab.wereldwijnen.sessions.Mandje;
@@ -24,8 +25,8 @@ public class DefaultBestelbonService implements BestelbonService {
 
     @Override
     @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
-    public long create(BestelbonForm bestelbonForm, Mandje mandje) {
-        return repository.create(bestelbonForm, mandje);
+    public long create(BestelBon bestelBon) {
+        return repository.create(bestelBon);
     }
 }
 

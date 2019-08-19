@@ -30,43 +30,17 @@ public class JpaBestelbonRepository implements BestelbonRepository {
     }
 
     @Override
-    public long create(BestelbonForm form, Mandje mandje) {
-        Map<String, Object> kolomWaarden = new HashMap<>();
-        kolomWaarden.put("naam", form.getNaam());
-        kolomWaarden.put("straat", form.getStraat());
-        kolomWaarden.put("huisNr", form.getHuisnummer());
-        kolomWaarden.put("postcode", form.getPostcode());
-        kolomWaarden.put("gemeente", form.getGemeente());
-        //long bestelbonId = insertBestelbon.executeAndReturnKey(kolomWaarden).longValue();
-
-        BestelBon bestelBon = new BestelBon(LocalDateTime.now(), form.getNaam(), new Adres(form.getStraat(), form.getHuisnummer(), String.valueOf(form.getPostcode()), form.getGemeente()), BestelWijze.AFHALEN);
+    public long create(BestelBon bestelBon) {
         manager.persist(bestelBon);
         manager.flush();
         long bestelbonId = bestelBon.getId();
-
-//        //long bestelbonId = 1;
-//        for (Map.Entry<Long, Integer> entry : mandje.getWijnen().entrySet()) {
-//            Long id = entry.getKey();
-//            Integer aantal = entry.getValue();
-//            Optional<Wijn> wijn = wijnService.findById(id);
-//            BigDecimal prijs = wijn.get().getPrijs();
-//            createBestelbonLijn(bestelbonId, id, aantal, prijs);
-//        }
         return bestelbonId;
     }
 
-//    private void createBestelbonLijn(long bestelbonId, long wijnId, int aantal, BigDecimal prijs) {
-//        BestelbonLijn bestelbonLijn = new BestelbonLijn(bestelbonId, wijnId, aantal, prijs);
+//    private void createBestelbonLijn(Wijn wijn, int aantal, BigDecimal prijs) {
+//        BestelbonLijn bestelbonLijn = new BestelbonLijn(wijn, aantal, prijs);
 //        manager.persist(bestelbonLijn);
 //        manager.flush();
-//
-//
-////        Map<String, Object> kolomWaarden = new HashMap<>();
-////        kolomWaarden.put("bestelbonid", bestelbonId);
-////        kolomWaarden.put("wijnid", wijnId);
-////        kolomWaarden.put("aantal", aantal);
-////        kolomWaarden.put("prijs", prijs);
-////        //insertBestelbonLijn.execute(kolomWaarden);
-//        wijnService.updateBesteldAantal(wijnId, aantal);
+//        wijnService.updateBesteldAantal(wijn.getId(), aantal);
 //    }
 }

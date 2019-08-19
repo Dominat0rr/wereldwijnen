@@ -12,16 +12,12 @@ import java.math.BigDecimal;
  *
  */
 
-//@Entity
-//@Table(name = "bestelbonlijnen")
 @Embeddable
 public class BestelbonLijn implements Serializable {
     private static final long serialVersionUID = 1L;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "bonid")
-    private long bestelbonId;
-
-    private long wijnId;
+    @ManyToOne
+    @JoinColumn(name = "wijnid")
+    private Wijn wijn;
     @NotNull(message = "Aantal mag niet leeg zijn")
     @Positive(message = "Aantal moet groter als 0 zijn")
     private long aantal;
@@ -30,19 +26,14 @@ public class BestelbonLijn implements Serializable {
 
     protected BestelbonLijn() { }
 
-    public BestelbonLijn(long bestelbonId, long wijnId, long aantal, BigDecimal aankoopPrijs) {
-        this.bestelbonId = bestelbonId;
-        this.wijnId = wijnId;
+    public BestelbonLijn(Wijn wijn, long aantal, BigDecimal aankoopPrijs) {
+        this.wijn = wijn;
         this.aantal = aantal;
         this.aankoopPrijs = aankoopPrijs;
     }
 
-    public long getBestelbonId() {
-        return bestelbonId;
-    }
-
-    public long getWijn() {
-        return wijnId;
+    public Wijn getWijn() {
+        return wijn;
     }
 
     public long getAantal() {

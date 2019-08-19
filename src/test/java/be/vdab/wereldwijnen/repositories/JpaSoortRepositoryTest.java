@@ -29,6 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Import(JpaSoortRepository.class)
 @Sql("/insertLand.sql")
 @Sql("/insertSoort.sql")
+@Sql("/insertWijn.sql")
 public class JpaSoortRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
     private static final String SOORTEN = "soorten";
     @Autowired
@@ -56,15 +57,8 @@ public class JpaSoortRepositoryTest extends AbstractTransactionalJUnit4SpringCon
     }
 
     @Test
-    public void create() {
-        soortRepository.create(soort);
-        assertThat(super.countRowsInTableWhere(SOORTEN, "id = " + soort.getId())).isOne();
-    }
-
-    @Test
-    public void delete() {
-        long id = idVanTestSoort();
-        soortRepository.delete(id);
-        assertThat(super.countRowsInTableWhere(SOORTEN, "id=" + id)).isZero();
+    public void wijnenLazyLoaded() {
+        assertThat(soortRepository.findById(idVanTestSoort()).get().getWijnen()).hasSize(2)
+                .first().extracting(wijn -> wijn.getJaar()).isEqualTo((short) 1985);
     }
 }

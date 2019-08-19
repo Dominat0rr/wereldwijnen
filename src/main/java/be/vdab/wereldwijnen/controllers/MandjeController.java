@@ -1,6 +1,6 @@
 package be.vdab.wereldwijnen.controllers;
 
-import be.vdab.wereldwijnen.domain.Wijn;
+import be.vdab.wereldwijnen.domain.*;
 import be.vdab.wereldwijnen.forms.BestelbonForm;
 import be.vdab.wereldwijnen.services.BestelbonService;
 import be.vdab.wereldwijnen.services.WijnService;
@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -79,9 +80,20 @@ public class MandjeController {
     public ModelAndView toevoegen(@Valid BestelbonForm form, Errors errors, RedirectAttributes redirect) {
         if (mandje.isLeeg()) return new ModelAndView("redirect:/");
         if(errors.hasErrors()) return new ModelAndView("mandje", "mandje", mandje);
-        long id = bestelbonService.create(form, mandje);
+        BestelBon bestelBon = new BestelBon(LocalDateTime.now(), form.getNaam(),
+                new Adres(form.getStraat(), form.getHuisnummer(), String.valueOf(form.getPostcode()), form.getGemeente()),
+                BestelWijze.AFHALEN);
+        wijnen.forEach((wijn, aantal) -> {
+            BestelbonLijn bestelbonLijn = new BestelbonLijn(wijn, aantal, wijn.getPrijs());
+            System.out.println("Bestelbonlijn: " + bestelbonLijn + " wijnId: " + bestelbonLijn.getWijn().getId());
+            System.out.println("Bestelbon: " + bestelBon);
+            bestelBon.add(bestelbonLijn);
+        });
+        long id = bestelbonService.create(bestelBon);
+        wijnen.clear();
         redirect.addAttribute("id", id);
         return new ModelAndView("redirect:/mandje/besteld/{id}");
+        //return new ModelAndView("redirect:/mandje");
     }
 
     @GetMapping("besteld/{id}")

@@ -1,5 +1,6 @@
 package be.vdab.wereldwijnen.repositories;
 
+import be.vdab.wereldwijnen.domain.BestelBon;
 import be.vdab.wereldwijnen.forms.BestelbonForm;
 import be.vdab.wereldwijnen.sessions.Mandje;
 
@@ -10,5 +11,5 @@ import be.vdab.wereldwijnen.sessions.Mandje;
  */
 
 public interface BestelbonRepository {
-    long create(BestelbonForm bestelbonFrom, Mandje mandje);
+    long create(BestelBon bestelBon);
 }

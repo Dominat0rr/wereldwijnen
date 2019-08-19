@@ -38,14 +38,4 @@ public class DefaultSoortService implements SoortService {
     public List<Soort> findAllByLandId(long id) {
         return repository.findAllByLandId(id);
     }
-
-    @Override
-    public void create(Soort soort) {
-        repository.create(soort);
-    }
-
-    @Override
-    public void delete(long id) {
-        repository.delete(id);
-    }
 }
