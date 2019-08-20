@@ -33,16 +33,4 @@ public class DefaultLandService implements LandService {
     public List<Land> findAll() {
         return repository.findAll();
     }
-
-    @Override
-    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
-    public void create(Land land) {
-        repository.create(land);
-    }
-
-    @Override
-    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
-    public void delete(long id) {
-        repository.delete(id);
-    }
 }

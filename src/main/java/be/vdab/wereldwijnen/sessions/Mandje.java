@@ -1,6 +1,5 @@
 package be.vdab.wereldwijnen.sessions;
 
-import be.vdab.wereldwijnen.domain.Wijn;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 

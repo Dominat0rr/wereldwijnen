@@ -1,11 +1,8 @@
 package be.vdab.wereldwijnen.controllers;
 
-import be.vdab.wereldwijnen.services.LandService;
-import be.vdab.wereldwijnen.services.SoortService;
 import be.vdab.wereldwijnen.services.WijnService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 

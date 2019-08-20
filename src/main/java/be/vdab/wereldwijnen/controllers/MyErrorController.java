@@ -1,4 +1,4 @@
-package be.vdab.bierhuis.controllers;
+package be.vdab.wereldwijnen.controllers;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
@@ -16,12 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class MyErrorController implements ErrorController {
-
-//    @RequestMapping("/error")
-//    public String handleError() {
-//        //do something like logging
-//        return "error";
-//    }
 
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request) {
