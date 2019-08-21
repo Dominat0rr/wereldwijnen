@@ -49,13 +49,13 @@ public class WijnController {
     }
 
     @PostMapping("{id}/bestellen")
-    ModelAndView bestellen(@PathVariable long id, @Valid BestelForm form, Errors errors) {
+    ModelAndView bestellen(@PathVariable long id, @Valid BestelForm bestelForm, Errors errors) {
         if (errors.hasErrors()) {
             ModelAndView modelAndView = new ModelAndView("wijn");
             wijnService.findById(id).ifPresent(wijn -> modelAndView.addObject(wijn));
             return modelAndView;
         }
-        mandje.voegToe(id, form.getAantal());
+        mandje.voegToe(id, bestelForm.getAantal());
         return new ModelAndView("redirect:/mandje");
     }
 }
